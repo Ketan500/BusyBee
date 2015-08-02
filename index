@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Echoing HTML Request Parameters</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>Modal Tester</h2>
+		<!-- Trigger the modal with a button -->
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Click here</button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div>
+					<div class="modal-body">
+						<form method="post">
+							<input type="checkbox" name="author" value="Agatha Christie">Agatha
+							<input type="checkbox" name="author" value="Narendra Modi">Prime
+							Minister <input type="checkbox" name="author"
+								value="Aastha Sethi">Painter <input type="submit"
+								value="Click">
+						</form>
+
+						<%
+							String[] authors = request.getParameterValues("author");
+							if (authors != null) {
+						%>
+						<h3>You have selected author(s):</h3>
+						<ul>
+							<%
+								for (int i = 0; i < authors.length; ++i) {
+							%>
+							<li><%=authors[i]%></li>
+							<%
+								}
+							%>
+						</ul>
+						<a href="<%=request.getRequestURI()%>">Reset</a>
+						<%
+							}
+						%>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
